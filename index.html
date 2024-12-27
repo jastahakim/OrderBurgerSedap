@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A&A BURGER</title>
+  
+  <!-- Favicon (ikon pada tab pelayar) -->
+  <link rel="icon" href="A&A-1.ico" type="image/x-icon">
+
+  <style>
+    /* Reset margin dan padding */
+    body, h1, h2, p, a, button, input, textarea {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Styling untuk keseluruhan halaman */
+    body {
+      background-color: #f1f1f1;
+      color: #333;
+      text-align: center;
+    }
+
+    /* Container umum untuk setiap bahagian */
+    .container {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Styling untuk logo */
+    .logo {
+      margin: 30px 0;
+    }
+
+    .logo img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Styling untuk butang */
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 20px;
+      color: white;
+      background-color: #f04d4d;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .button:hover {
+      background-color: #c13c3c;
+      transform: scale(1.05);
+    }
+
+    /* Styling untuk gambar menu */
+    .menu-image img {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+
+    /* Styling untuk borang */
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 20px auto;
+      display: none; /* Awalnya disembunyikan */
+      animation: fadeIn 1s ease-out forwards; /* Animasi fade-in */
+    }
+
+    textarea, input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .submit-button {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 18px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background-color: #45a049;
+    }
+
+    /* Animasi fade-in */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page Pertama -->
+  <div id="page1" class="container">
+    <div class="logo">
+      <img src="A&A-1.ico" alt="Logo A&A BURGER">
+    </div>
+    <h1>Selamat Datang ke A&A BURGER</h1>
+    <p>Burger halal, sedap, dan mampu milik di Limbang!</p>
+    <a href="#page2" class="button">Order Sekarang</a>
+  </div>
+
+  <!-- Page Kedua (Normal, dengan animasi pada borang) -->
+  <div id="page2" class="container" style="display: none;">
+    <h2>Menu Kami</h2>
+    <div class="menu-image">
+      <img src="List.jpg" alt="Menu A&A BURGER">
+    </div>
+
+    <!-- Borang Tempahan dengan Animasi -->
+    <form id="orderForm">
+      <textarea name="orderDetails" placeholder="Nyatakan burger pilihan anda..." required></textarea><br>
+      <input type="text" name="address" placeholder="Masukkan alamat penghantaran..." required><br>
+      <button type="submit" class="submit-button">Hantar Tempahan</button>
+    </form>
+  </div>
+
+  <script>
+    // Tukar paparan apabila "Order Sekarang" ditekan
+    document.querySelector(".button").addEventListener("click", function(event) {
+      event.preventDefault();
+      document.getElementById("page1").style.display = "none";
+      const page2 = document.getElementById("page2");
+      page2.style.display = "block";
+      
+      // Memaparkan borang dengan animasi
+      const form = document.querySelector("form");
+      form.style.display = "block"; // Menunjukkan borang apabila halaman kedua dipaparkan
+    });
+
+    // Hantar data melalui WhatsApp
+    document.getElementById("orderForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const orderDetails = document.querySelector('[name="orderDetails"]').value;
+      const address = document.querySelector('[name="address"]').value;
+      const whatsappNumber = "601114715609"; // Nombor WhatsApp anda tanpa '+'
+      const message = `Tempahan Burger:\n${orderDetails}\n\nAlamat Penghantaran:\n${address}`;
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`);
+    });
+  </script>
+</body>
+</html>
